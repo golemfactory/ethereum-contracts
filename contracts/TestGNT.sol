@@ -25,4 +25,12 @@ contract TestGNT {
     function balanceOf(address _owner) external constant returns (uint256) {
         return balances[_owner];
     }
+
+    function create() external {
+        var tokens = 1000 * 10 ** decimals;
+        if (balances[msg.sender] >= tokens) throw;
+        balances[msg.sender] += tokens;
+        totalSupply += tokens;
+        Transfer(0, msg.sender, tokens);
+    }
 }
